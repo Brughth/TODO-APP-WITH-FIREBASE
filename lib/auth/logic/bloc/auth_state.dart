@@ -5,6 +5,11 @@ class AuthState {
   final bool isLoading;
   final bool errorLoading;
   final bool successLoading;
+
+  final bool isCheckingAuthState;
+  final bool errorCheckingAuthState;
+  final bool successCheckingAuthState;
+
   final String? message;
   AuthState({
     this.user,
@@ -12,6 +17,10 @@ class AuthState {
     this.errorLoading = false,
     this.successLoading = false,
     this.message,
+    //
+    this.isCheckingAuthState = false,
+    this.errorCheckingAuthState = false,
+    this.successCheckingAuthState = false,
   });
 
   AuthState copyWith({
@@ -19,6 +28,9 @@ class AuthState {
     bool? isLoading,
     bool? errorLoading,
     bool? successLoading,
+    bool? isCheckingAuthState,
+    bool? errorCheckingAuthState,
+    bool? successCheckingAuthState,
     String? message,
   }) {
     return AuthState(
@@ -26,6 +38,11 @@ class AuthState {
       isLoading: isLoading ?? this.isLoading,
       errorLoading: errorLoading ?? this.errorLoading,
       successLoading: successLoading ?? this.successLoading,
+      isCheckingAuthState: isCheckingAuthState ?? this.isCheckingAuthState,
+      errorCheckingAuthState:
+          errorCheckingAuthState ?? this.errorCheckingAuthState,
+      successCheckingAuthState:
+          successCheckingAuthState ?? this.successCheckingAuthState,
       message: message ?? this.message,
     );
   }

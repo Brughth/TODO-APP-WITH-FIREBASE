@@ -108,5 +108,47 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         }
       },
     );
+
+    on<CheckAuthStateEvent>(
+      (event, emit) async {
+        try {
+          emit(
+            state.copyWith(
+              isCheckingAuthState: true,
+              errorCheckingAuthState: false,
+              successCheckingAuthState: false,
+            ),
+          );
+          var user = await authServices.checkAuthState();
+          if (user != null) {
+            emit(
+              state.copyWith(
+                user: user,
+                isCheckingAuthState: false,
+                errorCheckingAuthState: false,
+                successCheckingAuthState: true,
+              ),
+            );
+          } else {
+            emit(
+              state.copyWith(
+                isCheckingAuthState: false,
+                errorCheckingAuthState: true,
+                successCheckingAuthState: false,
+              ),
+            );
+          }
+        } catch (e) {
+          emit(
+            state.copyWith(
+              isCheckingAuthState: false,
+              errorCheckingAuthState: true,
+              successCheckingAuthState: false,
+            ),
+          );
+          print(e);
+        }
+      },
+    );
   }
 }

@@ -9,6 +9,14 @@ class AuthServices {
   final firebaseAuth = FirebaseAuth.instance;
   final userCollection = FirebaseFirestore.instance.collection('users');
 
+  Future<UserModel?>? checkAuthState() {
+    var result = firebaseAuth.currentUser;
+    if (result != null) {
+      return getUserInfo(result.uid);
+    }
+    return null;
+  }
+
   Future<UserModel> loginWithEmailAndPassword({
     required String email,
     required String password,

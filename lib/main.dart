@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:todo_app_with_firebase/app_init_screen.dart';
 import 'package:todo_app_with_firebase/auth/data/auth_services.dart';
 import 'package:todo_app_with_firebase/auth/logic/bloc/auth_bloc.dart';
 // Import the generated file
@@ -24,14 +25,14 @@ class MyApp extends StatelessWidget {
     return BlocProvider<AuthBloc>(
       create: (context) => AuthBloc(
         authServices: AuthServices(),
-      ),
+      )..add(CheckAuthStateEvent()),
       child: MaterialApp(
         title: 'Flutter Demo',
         theme: ThemeData(
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
           useMaterial3: true,
         ),
-        home: const LoginScreen(),
+        home: const AppInitScreen(),
       ),
     );
   }
